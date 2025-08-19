@@ -20,6 +20,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Aplicar migrations automaticamente na inicialização
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<OrganizadorContext>();
+    context.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
