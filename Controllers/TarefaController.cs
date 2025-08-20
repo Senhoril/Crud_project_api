@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrilhaApiDesafio.Context;
 using TrilhaApiDesafio.Models;
@@ -61,6 +62,7 @@ namespace TrilhaApiDesafio.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Criar(Tarefa tarefa)
         {
             if (tarefa.Data == DateTime.MinValue)
@@ -81,6 +83,7 @@ namespace TrilhaApiDesafio.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Atualizar(int id, Tarefa tarefa)
         {
             var tarefaBanco = _context.Tarefas.Find(id);
@@ -104,6 +107,7 @@ namespace TrilhaApiDesafio.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Deletar(int id)
         {
             var tarefaBanco = _context.Tarefas.Find(id);
